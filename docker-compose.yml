@@ -1,0 +1,28 @@
+version: '3.5'
+services:
+  laplace-api:
+    container_name: laplace-api
+    build: .
+    ports:
+      - ${SERVER_PORT}:${SERVER_PORT}
+    networks:
+      - laplace-network
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    restart: always
+  laplace-db:
+    image: 'mongo'
+    container_name: laplace-db
+    ports:
+      - ${MONGO_PORT}:${MONGO_PORT}
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: laplace
+      MONGO_INITDB_ROOT_PASSWORD: laplace123
+    volumes:
+      - ./data/db:/data/db
+    networks:
+      - laplace-network
+networks:
+  laplace-network:
+    driver: bridge
