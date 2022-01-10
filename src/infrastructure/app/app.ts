@@ -1,6 +1,9 @@
 import helmet from 'helmet';
 
 import {
+  createItemController,
+  findItemByIdController,
+  findItemsController,
   healthCheckController,
   signInController,
   signUpController,
@@ -40,6 +43,9 @@ class App {
     this.app.use('/', healthCheckController.router);
     this.app.use('/', signUpController.router);
     this.app.use('/', signInController.router);
+    this.app.use('/', createItemController.router);
+    this.app.use('/', findItemByIdController.router);
+    this.app.use('/', findItemsController.router);
   };
 }
 
